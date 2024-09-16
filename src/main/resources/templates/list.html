@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:if="${pageTitle}" th:text="${pageTitle}">Base App</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row mt-5">
+
+        <div class="col-md-12">
+            <table style="width: 100%; border: 1px solid black">
+                <thead>
+                <tr>
+                    <th>Field1</th>
+                    <th>Field2</th>
+                    <th>Field3</th>
+                    <th>Uploaded Files</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="i : ${list}">
+                    <td th:text="${i.field1}"></td>
+                    <td th:text="${i.field2}"></td>
+                    <td th:text="${i.field3}"></td>
+                    <td>
+                        <ul>
+                            <li th:each="fileModel : ${i.fileList}">
+<!--                                <span th:text="${fileModel.fileName}"></span> &lt;!&ndash; Assuming fileName is a property of FileModel &ndash;&gt;-->
+                                <a target="_blank" th:href="@{'/uploads/' + ${fileModel.fileName}}" th:text="${fileModel.fileName}"></a>
+                            </li>
+                        </ul>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/jquery-3.5.1.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+</body>
+</html>
